@@ -8,16 +8,19 @@ void main(List<String> arguments) async {
   var response = await httpClient.get(url);
   GetCars data = GetCars.fromJson(response.data);
   List<Cars> carsMassive = data.cars;
-  int count = 0;
-  double sum = 0.0;
+  int count = 0; //кол во машин
+  double sum = 0.0; //цены
   for (var el in carsMassive) {
-    if (el.car_color == "Yellow" && el.availability == true) {
-      String str = el.price;
+    // для каждого элемента
+    if (el.car_color == "Yellow") {
+      String str = el.price; //удалить $
       double price = double.parse(str.substring(1));
       sum += price;
       count++;
     }
   }
-  print(count);
-  print(sum);
+  double average = (sum / count);
+
+  print(average);
+
 }
